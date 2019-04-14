@@ -23,7 +23,24 @@ namespace DnDApp2
 
         private void Submit_Click(object sender, EventArgs e)
         {
-            this.dataManager.addTrait(this.name.Text, this.descBox.Text, Int32.Parse(this.cost.Text));
+            try
+            {
+                this.dataManager.addTrait(this.name.Text, this.descBox.Text, Int32.Parse(this.cost.Text));
+
+            }
+            catch (System.Data.ConstraintException)
+            {
+                string message = "Allready excists.";
+                string caption = "Would you like to override?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(caption, message, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    this.dataManager.addTrait(this.name.Text, this.descBox.Text, Int32.Parse(this.cost.Text), true);
+                }
+            }
+
             this.caller.updateBoxes();
         }
 

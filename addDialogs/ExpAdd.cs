@@ -23,12 +23,33 @@ namespace DnDApp2
 
         private void Submit_Click(object sender, EventArgs e)
         {
-            dataManager.addExperience(this.name.Text,
-                Int32.Parse(this.attack.Text),
-                Int32.Parse(this.power.Text),
-                Int32.Parse(this.defense.Text),
-                Int32.Parse(this.toughness.Text),
-                Int32.Parse(this.morale.Text));
+            try
+            {
+                dataManager.addExperience(this.name.Text,
+            Int32.Parse(this.attack.Text),
+            Int32.Parse(this.power.Text),
+            Int32.Parse(this.defense.Text),
+            Int32.Parse(this.toughness.Text),
+            Int32.Parse(this.morale.Text));
+            }
+            catch (System.Data.ConstraintException)
+            {
+                string message = "Allready excists.";
+                string caption = "Would you like to override?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(caption, message, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    dataManager.addExperience(this.name.Text,
+                        Int32.Parse(this.attack.Text),
+                        Int32.Parse(this.power.Text),
+                        Int32.Parse(this.defense.Text),
+                        Int32.Parse(this.toughness.Text),
+                        Int32.Parse(this.morale.Text), true);
+                }
+            }
+
             caller.updateBoxes();
         }
 

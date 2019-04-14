@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="type" msprop:Generator_TableClassName="typeDataTable" msprop:Generator_TableVarName="tabletype" msprop:Generator_TablePropName="type" msprop:Generator_RowDeletingName="typeRowDeleting" msprop:Generator_RowChangingName="typeRowChanging" msprop:Generator_RowEvHandlerName="typeRowChangeEventHandler" msprop:Generator_RowDeletedName="typeRowDeleted" msprop:Generator_UserTableName="type" msprop:Generator_RowChangedName="typeRowChanged" msprop:Generator_RowEvArgName="typeRowChangeEvent" msprop:Generator_RowClassName="typeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" />
+              <xs:element name="attack" msprop:Generator_ColumnVarNameInTable="columnattack" msprop:Generator_ColumnPropNameInRow="attack" msprop:Generator_ColumnPropNameInTable="attackColumn" msprop:Generator_UserColumnName="attack" type="xs:string" minOccurs="0" />
+              <xs:element name="power" msprop:Generator_ColumnVarNameInTable="columnpower" msprop:Generator_ColumnPropNameInRow="power" msprop:Generator_ColumnPropNameInTable="powerColumn" msprop:Generator_UserColumnName="power" type="xs:string" minOccurs="0" />
+              <xs:element name="defense" msprop:Generator_ColumnVarNameInTable="columndefense" msprop:Generator_ColumnPropNameInRow="defense" msprop:Generator_ColumnPropNameInTable="defenseColumn" msprop:Generator_UserColumnName="defense" type="xs:string" minOccurs="0" />
+              <xs:element name="toughness" msprop:Generator_ColumnVarNameInTable="columntoughness" msprop:Generator_ColumnPropNameInRow="toughness" msprop:Generator_ColumnPropNameInTable="toughnessColumn" msprop:Generator_UserColumnName="toughness" type="xs:string" minOccurs="0" />
+              <xs:element name="morale" msprop:Generator_ColumnVarNameInTable="columnmorale" msprop:Generator_ColumnPropNameInRow="morale" msprop:Generator_ColumnPropNameInTable="moraleColumn" msprop:Generator_UserColumnName="morale" type="xs:string" minOccurs="0" />
+              <xs:element name="costmod" msprop:Generator_ColumnVarNameInTable="columncostmod" msprop:Generator_ColumnPropNameInRow="costmod" msprop:Generator_ColumnPropNameInTable="costmodColumn" msprop:Generator_UserColumnName="costmod" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="size" msprop:Generator_TableClassName="sizeDataTable" msprop:Generator_TableVarName="tablesize" msprop:Generator_TablePropName="size" msprop:Generator_RowDeletingName="sizeRowDeleting" msprop:Generator_RowChangingName="sizeRowChanging" msprop:Generator_RowEvHandlerName="sizeRowChangeEventHandler" msprop:Generator_RowDeletedName="sizeRowDeleted" msprop:Generator_UserTableName="size" msprop:Generator_RowChangedName="sizeRowChanged" msprop:Generator_RowEvArgName="sizeRowChangeEvent" msprop:Generator_RowClassName="sizeRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="size" msprop:Generator_ColumnVarNameInTable="columnsize" msprop:Generator_ColumnPropNameInRow="size" msprop:Generator_ColumnPropNameInTable="sizeColumn" msprop:Generator_UserColumnName="size" type="xs:string" />
+              <xs:element name="costmod" msprop:Generator_ColumnVarNameInTable="columncostmod" msprop:Generator_ColumnPropNameInRow="costmod" msprop:Generator_ColumnPropNameInTable="costmodColumn" msprop:Generator_UserColumnName="costmod" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="equipment" msprop:Generator_TableClassName="equipmentDataTable" msprop:Generator_TableVarName="tableequipment" msprop:Generator_TablePropName="equipment" msprop:Generator_RowDeletingName="equipmentRowDeleting" msprop:Generator_RowChangingName="equipmentRowChanging" msprop:Generator_RowEvHandlerName="equipmentRowChangeEventHandler" msprop:Generator_RowDeletedName="equipmentRowDeleted" msprop:Generator_UserTableName="equipment" msprop:Generator_RowChangedName="equipmentRowChanged" msprop:Generator_RowEvArgName="equipmentRowChangeEvent" msprop:Generator_RowClassName="equipmentRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" />
+              <xs:element name="attack" msprop:Generator_ColumnVarNameInTable="columnattack" msprop:Generator_ColumnPropNameInRow="attack" msprop:Generator_ColumnPropNameInTable="attackColumn" msprop:Generator_UserColumnName="attack" type="xs:string" minOccurs="0" />
+              <xs:element name="power" msprop:Generator_ColumnVarNameInTable="columnpower" msprop:Generator_ColumnPropNameInRow="power" msprop:Generator_ColumnPropNameInTable="powerColumn" msprop:Generator_UserColumnName="power" type="xs:string" minOccurs="0" />
+              <xs:element name="defense" msprop:Generator_ColumnVarNameInTable="columndefense" msprop:Generator_ColumnPropNameInRow="defense" msprop:Generator_ColumnPropNameInTable="defenseColumn" msprop:Generator_UserColumnName="defense" type="xs:string" minOccurs="0" />
+              <xs:element name="toughness" msprop:Generator_ColumnVarNameInTable="columntoughness" msprop:Generator_ColumnPropNameInRow="toughness" msprop:Generator_ColumnPropNameInTable="toughnessColumn" msprop:Generator_UserColumnName="toughness" type="xs:string" minOccurs="0" />
+              <xs:element name="morale" msprop:Generator_ColumnVarNameInTable="columnmorale" msprop:Generator_ColumnPropNameInRow="morale" msprop:Generator_ColumnPropNameInTable="moraleColumn" msprop:Generator_UserColumnName="morale" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="experience" msprop:Generator_TableClassName="experienceDataTable" msprop:Generator_TableVarName="tableexperience" msprop:Generator_TablePropName="experience" msprop:Generator_RowDeletingName="experienceRowDeleting" msprop:Generator_RowChangingName="experienceRowChanging" msprop:Generator_RowEvHandlerName="experienceRowChangeEventHandler" msprop:Generator_RowDeletedName="experienceRowDeleted" msprop:Generator_UserTableName="experience" msprop:Generator_RowChangedName="experienceRowChanged" msprop:Generator_RowEvArgName="experienceRowChangeEvent" msprop:Generator_RowClassName="experienceRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" />
+              <xs:element name="attack" msprop:Generator_ColumnVarNameInTable="columnattack" msprop:Generator_ColumnPropNameInRow="attack" msprop:Generator_ColumnPropNameInTable="attackColumn" msprop:Generator_UserColumnName="attack" type="xs:string" minOccurs="0" />
+              <xs:element name="power" msprop:Generator_ColumnVarNameInTable="columnpower" msprop:Generator_ColumnPropNameInRow="power" msprop:Generator_ColumnPropNameInTable="powerColumn" msprop:Generator_UserColumnName="power" type="xs:string" minOccurs="0" />
+              <xs:element name="defense" msprop:Generator_ColumnVarNameInTable="columndefense" msprop:Generator_ColumnPropNameInRow="defense" msprop:Generator_ColumnPropNameInTable="defenseColumn" msprop:Generator_UserColumnName="defense" type="xs:string" minOccurs="0" />
+              <xs:element name="toughness" msprop:Generator_ColumnVarNameInTable="columntoughness" msprop:Generator_ColumnPropNameInRow="toughness" msprop:Generator_ColumnPropNameInTable="toughnessColumn" msprop:Generator_UserColumnName="toughness" type="xs:string" minOccurs="0" />
+              <xs:element name="morale" msprop:Generator_ColumnVarNameInTable="columnmorale" msprop:Generator_ColumnPropNameInRow="morale" msprop:Generator_ColumnPropNameInTable="moraleColumn" msprop:Generator_UserColumnName="morale" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ancestry" msprop:Generator_TableClassName="ancestryDataTable" msprop:Generator_TableVarName="tableancestry" msprop:Generator_TablePropName="ancestry" msprop:Generator_RowDeletingName="ancestryRowDeleting" msprop:Generator_RowChangingName="ancestryRowChanging" msprop:Generator_RowEvHandlerName="ancestryRowChangeEventHandler" msprop:Generator_RowDeletedName="ancestryRowDeleted" msprop:Generator_UserTableName="ancestry" msprop:Generator_RowChangedName="ancestryRowChanged" msprop:Generator_RowEvArgName="ancestryRowChangeEvent" msprop:Generator_RowClassName="ancestryRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" />
+              <xs:element name="attack" msprop:Generator_ColumnVarNameInTable="columnattack" msprop:Generator_ColumnPropNameInRow="attack" msprop:Generator_ColumnPropNameInTable="attackColumn" msprop:Generator_UserColumnName="attack" type="xs:string" minOccurs="0" />
+              <xs:element name="power" msprop:Generator_ColumnVarNameInTable="columnpower" msprop:Generator_ColumnPropNameInRow="power" msprop:Generator_ColumnPropNameInTable="powerColumn" msprop:Generator_UserColumnName="power" type="xs:string" minOccurs="0" />
+              <xs:element name="defense" msprop:Generator_ColumnVarNameInTable="columndefense" msprop:Generator_ColumnPropNameInRow="defense" msprop:Generator_ColumnPropNameInTable="defenseColumn" msprop:Generator_UserColumnName="defense" type="xs:string" minOccurs="0" />
+              <xs:element name="toughness" msprop:Generator_ColumnVarNameInTable="columntoughness" msprop:Generator_ColumnPropNameInRow="toughness" msprop:Generator_ColumnPropNameInTable="toughnessColumn" msprop:Generator_UserColumnName="toughness" type="xs:string" minOccurs="0" />
+              <xs:element name="morale" msprop:Generator_ColumnVarNameInTable="columnmorale" msprop:Generator_ColumnPropNameInRow="morale" msprop:Generator_ColumnPropNameInTable="moraleColumn" msprop:Generator_UserColumnName="morale" type="xs:string" minOccurs="0" />
+              <xs:element name="traits" msprop:Generator_ColumnVarNameInTable="columntraits" msprop:Generator_ColumnPropNameInRow="traits" msprop:Generator_ColumnPropNameInTable="traitsColumn" msprop:Generator_UserColumnName="traits" type="xs:string" minOccurs="0" />
+              <xs:element name="traitsCost" msprop:Generator_ColumnVarNameInTable="columntraitsCost" msprop:Generator_ColumnPropNameInRow="traitsCost" msprop:Generator_ColumnPropNameInTable="traitsCostColumn" msprop:Generator_UserColumnName="traitsCost" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="trait" msprop:Generator_TableClassName="traitDataTable" msprop:Generator_TableVarName="tabletrait" msprop:Generator_TablePropName="trait" msprop:Generator_RowDeletingName="traitRowDeleting" msprop:Generator_RowChangingName="traitRowChanging" msprop:Generator_RowEvHandlerName="traitRowChangeEventHandler" msprop:Generator_RowDeletedName="traitRowDeleted" msprop:Generator_UserTableName="trait" msprop:Generator_RowChangedName="traitRowChanged" msprop:Generator_RowEvArgName="traitRowChangeEvent" msprop:Generator_RowClassName="traitRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msdata:Caption="size" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" />
+              <xs:element name="desc" msdata:Caption="costmod" msprop:Generator_ColumnVarNameInTable="columndesc" msprop:Generator_ColumnPropNameInRow="desc" msprop:Generator_ColumnPropNameInTable="descColumn" msprop:Generator_UserColumnName="desc" type="xs:string" minOccurs="0" />
+              <xs:element name="cost" msprop:Generator_ColumnVarNameInTable="columncost" msprop:Generator_ColumnPropNameInRow="cost" msprop:Generator_ColumnPropNameInTable="costColumn" msprop:Generator_UserColumnName="cost" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:type" />
+      <xs:field xpath="mstns:name" />
+    </xs:unique>
+    <xs:unique name="size_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:size" />
+      <xs:field xpath="mstns:size" />
+    </xs:unique>
+    <xs:unique name="equipment_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:equipment" />
+      <xs:field xpath="mstns:name" />
+    </xs:unique>
+    <xs:unique name="experience_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:experience" />
+      <xs:field xpath="mstns:name" />
+    </xs:unique>
+    <xs:unique name="ancestry_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ancestry" />
+      <xs:field xpath="mstns:name" />
+    </xs:unique>
+    <xs:unique name="trait_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:trait" />
+      <xs:field xpath="mstns:name" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

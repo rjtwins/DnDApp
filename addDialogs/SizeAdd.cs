@@ -25,7 +25,22 @@ namespace DnDApp2
         {
             string costmod = this.costMod.Text.Replace(',', '.');
             string dice = this.befored.Text + 'd' + this.afterd.Text;
-            dataManager.addSize(dice, Double.Parse(costmod));
+            try
+            {
+                dataManager.addSize(dice, Double.Parse(costmod));
+            }
+            catch (System.Data.ConstraintException)
+            {
+                string message = "Allready excists.";
+                string caption = "Would you like to override?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(caption, message, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    dataManager.addSize(dice, Double.Parse(costmod), true);
+                }
+            }
             this.caller.updateBoxes();
         }
 

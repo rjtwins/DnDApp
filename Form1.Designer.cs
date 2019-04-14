@@ -57,6 +57,10 @@ namespace DnDApp2
             this.label5 = new System.Windows.Forms.Label();
             this.sizeBox = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nameInputBox = new System.Windows.Forms.TextBox();
+            this.cardName = new System.Windows.Forms.Label();
+            this.costo = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.toughnesso = new System.Windows.Forms.Label();
             this.defenseo = new System.Windows.Forms.Label();
             this.sizeo = new System.Windows.Forms.Label();
@@ -71,8 +75,7 @@ namespace DnDApp2
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.traitsOutput = new System.Windows.Forms.ListBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.costo = new System.Windows.Forms.Label();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -100,19 +103,22 @@ namespace DnDApp2
             // generateCardToolStripMenuItem
             // 
             this.generateCardToolStripMenuItem.Name = "generateCardToolStripMenuItem";
-            this.generateCardToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.generateCardToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generateCardToolStripMenuItem.Text = "Generate Unit Card";
+            this.generateCardToolStripMenuItem.Click += new System.EventHandler(this.GenerateCardToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
+            this.toolStripSeparator1,
             this.importTablesToolStripMenuItem,
             this.exportTablesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -129,7 +135,7 @@ namespace DnDApp2
             this.typeToolStripMenuItem,
             this.sizeToolStripMenuItem});
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addToolStripMenuItem.Text = "Add";
             // 
             // ancestryToolStripMenuItem
@@ -177,14 +183,14 @@ namespace DnDApp2
             // importTablesToolStripMenuItem
             // 
             this.importTablesToolStripMenuItem.Name = "importTablesToolStripMenuItem";
-            this.importTablesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.importTablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importTablesToolStripMenuItem.Text = "Import Tables";
             this.importTablesToolStripMenuItem.Click += new System.EventHandler(this.ImportTablesToolStripMenuItem_Click);
             // 
             // exportTablesToolStripMenuItem
             // 
             this.exportTablesToolStripMenuItem.Name = "exportTablesToolStripMenuItem";
-            this.exportTablesToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exportTablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportTablesToolStripMenuItem.Text = "Export Tables";
             this.exportTablesToolStripMenuItem.Click += new System.EventHandler(this.ExportTablesToolStripMenuItem_Click);
             // 
@@ -285,6 +291,8 @@ namespace DnDApp2
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nameInputBox);
+            this.groupBox1.Controls.Add(this.cardName);
             this.groupBox1.Controls.Add(this.costo);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.toughnesso);
@@ -307,6 +315,47 @@ namespace DnDApp2
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Unit Info";
+            // 
+            // nameInputBox
+            // 
+            this.nameInputBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameInputBox.Location = new System.Drawing.Point(9, 16);
+            this.nameInputBox.Name = "nameInputBox";
+            this.nameInputBox.Size = new System.Drawing.Size(302, 20);
+            this.nameInputBox.TabIndex = 31;
+            this.nameInputBox.Text = "Unit Name";
+            this.nameInputBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cardName
+            // 
+            this.cardName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cardName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cardName.Location = new System.Drawing.Point(10, 40);
+            this.cardName.Name = "cardName";
+            this.cardName.Size = new System.Drawing.Size(301, 20);
+            this.cardName.TabIndex = 30;
+            this.cardName.Text = "----------------------";
+            this.cardName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // costo
+            // 
+            this.costo.AutoSize = true;
+            this.costo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.costo.Location = new System.Drawing.Point(252, 64);
+            this.costo.Name = "costo";
+            this.costo.Size = new System.Drawing.Size(14, 13);
+            this.costo.TabIndex = 29;
+            this.costo.Text = "0";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(157, 64);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(40, 13);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "COST";
             // 
             // toughnesso
             // 
@@ -445,26 +494,12 @@ namespace DnDApp2
             this.traitsOutput.Name = "traitsOutput";
             this.traitsOutput.Size = new System.Drawing.Size(302, 95);
             this.traitsOutput.TabIndex = 0;
+            this.traitsOutput.DoubleClick += new System.EventHandler(this.TraitsOutput_DoubleClick);
             // 
-            // label10
+            // toolStripSeparator1
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(157, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 13);
-            this.label10.TabIndex = 28;
-            this.label10.Text = "COST";
-            // 
-            // costo
-            // 
-            this.costo.AutoSize = true;
-            this.costo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.costo.Location = new System.Drawing.Point(252, 64);
-            this.costo.Name = "costo";
-            this.costo.Size = new System.Drawing.Size(14, 13);
-            this.costo.TabIndex = 29;
-            this.costo.Text = "0";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // DnDUnitCalc
             // 
@@ -484,7 +519,11 @@ namespace DnDApp2
             this.Controls.Add(this.ancestryBox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(602, 356);
+            this.MinimumSize = new System.Drawing.Size(602, 356);
             this.Name = "DnDUnitCalc";
+            this.ShowIcon = false;
             this.Text = "UnitCalc";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -539,6 +578,9 @@ namespace DnDApp2
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label costo;
+        private System.Windows.Forms.TextBox nameInputBox;
+        private System.Windows.Forms.Label cardName;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

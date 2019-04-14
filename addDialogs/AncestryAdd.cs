@@ -18,9 +18,9 @@ namespace DnDApp2
         {
             InitializeComponent();
             this.dataManager = dataManager;
-            foreach (KeyValuePair<string, Trait> entry in dataManager.traitsDict)
+            foreach (DataRow entry in dataManager.traitsDict)
             {
-                this.traitscbox.Items.Add(entry.Key);
+                this.traitscbox.Items.Add((string)entry["name"]);
             }
             this.caller = caller;
         }
@@ -32,14 +32,36 @@ namespace DnDApp2
             {
                 traits.Add(item.ToString());
             }
-            dataManager.addAncestory(this.name.Text,
-                Int32.Parse(this.attack.Text),
-                Int32.Parse(this.power.Text),
-                Int32.Parse(this.defense.Text),
-                Int32.Parse(this.toughness.Text),
-                Int32.Parse(this.morale.Text),
-                traits);
+            try
+            {
+                dataManager.addAncestory(this.name.Text,
+            Int32.Parse(this.attack.Text),
+            Int32.Parse(this.power.Text),
+            Int32.Parse(this.defense.Text),
+            Int32.Parse(this.toughness.Text),
+            Int32.Parse(this.morale.Text),
+            traits);
+            }
+            catch (System.Data.ConstraintException)
+            {
+                string message = "Allready excists.";
+                string caption = "Would you like to override?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(caption, message, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    dataManager.addAncestory(this.name.Text,
+                        Int32.Parse(this.attack.Text),
+                        Int32.Parse(this.power.Text),
+                        Int32.Parse(this.defense.Text),
+                        Int32.Parse(this.toughness.Text),
+                        Int32.Parse(this.morale.Text),
+                        traits, true);
+                }
+            }
             this.caller.updateBoxes();
+
         }
 
         private void AddTrait_Click(object sender, EventArgs e)

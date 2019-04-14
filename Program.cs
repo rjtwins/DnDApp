@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.Serialization;
+using System.Data;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Xml.Serialization;
+using System.IO;
 
 namespace DnDApp2
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             DataManager dataManager = new DataManager();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            dataManager.loadDefaultData();
             Application.Run(new DnDUnitCalc(dataManager));
         }
     }
@@ -28,141 +24,220 @@ namespace DnDApp2
     public class DataManager
     {
         public Unit unit;
-        public Dictionary<string, Trait> traitsDict = new Dictionary<string, Trait>();
-        public Dictionary<string, UnitAncestry> ancestories = new Dictionary<string, UnitAncestry>();
-        public Dictionary<string, UnitEquipment> equipment = new Dictionary<string, UnitEquipment>();
-        public Dictionary<string, UnitExperience> experiences = new Dictionary<string, UnitExperience>();
-        public Dictionary<string, UnitSize> sizes = new Dictionary<string, UnitSize>();
-        public Dictionary<string, UnitType> types = new Dictionary<string, UnitType>();
-        public DataManager()
+        public DataSet1.traitDataTable traitsDict = new DataSet1.traitDataTable();
+        public DataSet1.ancestryDataTable ancestories = new DataSet1.ancestryDataTable();
+        public DataSet1.equipmentDataTable equipment = new DataSet1.equipmentDataTable();
+        public DataSet1.experienceDataTable experiences = new DataSet1.experienceDataTable();
+        public DataSet1.typeDataTable types = new DataSet1.typeDataTable();
+        public DataSet1.sizeDataTable sizes = new DataSet1.sizeDataTable();
+
+        public void makeUnit(string ancestory, string unitEquipment, string experience, string unitSize, string unitType)
         {
 
-        }
-
-        public void makeUnit(string ancestory, string unitEquipment, string experience, string size, string type)
-        {
+            if (ancestory == null || ancestory == "" ||
+                unitType == null || unitType == "" ||
+                unitEquipment == null || unitEquipment == "" ||
+                experience == null || experience == "" ||
+                unitSize == null || unitSize == "")
+            {
+                return;
+            }
             this.unit = new Unit(
-                this.ancestories[ancestory],
-                this.types[type],
-                this.equipment[unitEquipment],
-                this.experiences[experience],
-                this.sizes[size]
+                this.ancestories.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == ancestory),
+                this.types.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == unitType),
+                this.equipment.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == unitEquipment),
+                this.experiences.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == experience),
+                this.sizes.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("size") == unitSize)
                 );
             unit.totals();
             unit.calc_cost();
         }
 
-        public void addTrait(string name, string desc, int cost)
+        public void addTrait(string name, string desc, int cost, bool force = false)
         {
-            Trait trait = new Trait(name, desc, cost);
-            this.traitsDict.Add(name, trait);
-        }
-        public void addAncestory(string name, int attack, int power, int defense, int toughness, int morale, List<string> traits)
-        {
-            UnitAncestry ancestry = new UnitAncestry(name, attack, power, defense, toughness, morale);
-            foreach (string trait in traits)
+            if (force)
             {
-                ancestry.add_trait(traitsDict[trait]);
+                this.traitsDict.Rows.Remove(
+                    this.traitsDict.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == name));
+            }
+            this.traitsDict.Rows.Add(new object[] { name, desc, cost });
+        }
+        public void addAncestory(string name, int attack, int power, int defense, int toughness, int morale, List<string> traits, bool force = false)
+        {
+
+            if (force)
+            {
+                this.ancestories.Rows.Remove(
+                    this.ancestories.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == name));
             }
 
-            this.ancestories.Add(name, ancestry);
+            string traitsString = String.Join("\n", traits.ToArray());
+            int traitsCost = 0;
+            foreach(string trait in traits)
+            {
+                DataRow row = this.traitsDict.AsEnumerable().SingleOrDefault(r => r.Field<string>("name") == trait);
+                traitsCost += Int32.Parse((string)row["cost"]);
+            }
+            this.ancestories.Rows.Add(new object[] { name, attack, power, defense, toughness, morale, traitsString, traitsCost.ToString()});
         }
-        public void addEquipment(string name, int attack, int power, int defense, int toughness, int morale)
+        public void addEquipment(string name, int attack, int power, int defense, int toughness, int morale, bool force = false)
         {
-            UnitEquipment unitEquipment = new UnitEquipment(name, attack, power, defense, toughness, morale);
-            this.equipment.Add(name, unitEquipment);
-        }
-        public void addExperience(string name, int attack, int power, int defense, int toughness, int morale)
-        {
-            UnitExperience experience = new UnitExperience(name, attack, power, defense, toughness, morale);
-            this.experiences.Add(name, experience);
+            if (force)
+            {
+                this.equipment.Rows.Remove(
+                    this.equipment.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == name));
+            }
 
+            this.equipment.Rows.Add(new object[] { name, attack, power, defense, toughness, morale });
         }
-        public void addSize(string dice, double mod)
+        public void addExperience(string name, int attack, int power, int defense, int toughness, int morale, bool force = false)
         {
-            UnitSize size = new UnitSize(dice, mod);
-            this.sizes.Add(dice, size);
+            if (force)
+            {
+                this.experiences.Rows.Remove(
+                    this.experiences.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == name));
+            }
+
+            this.experiences.Rows.Add(new object[] { name, attack, power, defense, toughness, morale });
         }
-        public void addType(string name, int attack, int power, int defense, int toughness, int morale, double mod)
+        public void addSize(string dice, double mod, bool force = false)
         {
-            UnitType unitType = new UnitType(name, attack, power, defense, toughness, morale, mod);
-            this.types.Add(name, unitType);
+            if (force)
+            {
+                this.sizes.Rows.Remove(
+                    this.sizes.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == dice));
+            }
+
+            this.sizes.Rows.Add(new object[] { dice, mod });
         }
-        public void SerializeNow()
+
+        internal void generateCard()
         {
-            // Serialize the object data to a file
-            Stream stream = File.Open("data.dat", FileMode.Create);
-            BinaryFormatter bf = new BinaryFormatter();
-            // Send the object data to the file
-            bf.Serialize(stream, new TableWrapper(this.traitsDict, this.ancestories, this.equipment, this.experiences, this.sizes, this.types));
+            return;
+        }
+
+        public void addType(string name, int attack, int power, int defense, int toughness, int morale, double mod, bool force = false)
+        {
+            if (force)
+            {
+                this.types.Rows.Remove(
+                    this.types.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == name));
+            }
+            this.types.Rows.Add(new object[] { name, attack, power, defense, toughness, morale, mod });
+        }
+
+        public void loadDefaultData()
+        {
+            string filePath;
+            traitsDict = new DataSet1.traitDataTable();
+            ancestories = new DataSet1.ancestryDataTable();
+            equipment = new DataSet1.equipmentDataTable();
+            experiences = new DataSet1.experienceDataTable();
+            types = new DataSet1.typeDataTable();
+            sizes = new DataSet1.sizeDataTable();
+
+            filePath = "traits_saf.xml";
+            traitsDict.ReadXml(filePath);
+
+            filePath = "ancestories_saf.xml";
+            ancestories.ReadXml(filePath);
+
+            filePath = "equipment_saf.xml";
+            equipment.ReadXml(filePath);
+
+            filePath = "experiences_saf.xml";
+            experiences.ReadXml(filePath);
+
+            filePath = "types_saf.xml";
+            types.ReadXml(filePath);
+
+            filePath = "sizes_saf.xml";
+            sizes.ReadXml(filePath);
+        }
+
+        public void SerializeNow(String path)
+        {
+            BinaryFormatter b = new BinaryFormatter();
+            Stream s = File.OpenWrite(path);
+
+            Dictionary<string, string> xmlStringDict = new Dictionary<string, string>();
+
+            StringWriter sw = new StringWriter();
+
+            this.ancestories.WriteXml(sw);
+            xmlStringDict.Add("ancestories", sw.ToString());
+            sw = new StringWriter();
+
+            this.traitsDict.WriteXml(sw);
+            xmlStringDict.Add("traitsDict", sw.ToString());
+            sw = new StringWriter();
+
+            this.equipment.WriteXml(sw);
+            xmlStringDict.Add("equipment", sw.ToString());
+            sw = new StringWriter();
+
+            this.experiences.WriteXml(sw);
+            xmlStringDict.Add("experiences", sw.ToString());
+            sw = new StringWriter();
+
+            this.types.WriteXml(sw);
+            xmlStringDict.Add("types", sw.ToString());
+            sw = new StringWriter();
+
+            this.sizes.WriteXml(sw);
+            xmlStringDict.Add("sizes", sw.ToString());
+
+            b.Serialize(s, xmlStringDict);
+            sw.Close();
+            s.Close();
+        }
+        public void DeSerializeNow(String path)
+        {
+            traitsDict = new DataSet1.traitDataTable();
+            ancestories = new DataSet1.ancestryDataTable();
+            equipment = new DataSet1.equipmentDataTable();
+            experiences = new DataSet1.experienceDataTable();
+            types = new DataSet1.typeDataTable();
+            sizes = new DataSet1.sizeDataTable();
+
+            Dictionary<string, string> xmlStringDict;
+
+            FileStream s = new FileStream(path, FileMode.Open);
+            BinaryFormatter b = new BinaryFormatter();
+            xmlStringDict = (Dictionary<string, string>)b.Deserialize(s);
+            StringReader stream;
+
+            stream = new StringReader(xmlStringDict["ancestories"]);
+            ancestories.ReadXml(stream);
+
+            stream = new StringReader(xmlStringDict["traitsDict"]);
+            traitsDict.ReadXml(stream);
+
+            stream = new StringReader(xmlStringDict["equipment"]);
+            equipment.ReadXml(stream);
+
+            stream = new StringReader(xmlStringDict["experiences"]);
+            experiences.ReadXml(stream);
+
+            stream = new StringReader(xmlStringDict["types"]);
+            types.ReadXml(stream);
+
+            stream = new StringReader(xmlStringDict["sizes"]);
+            sizes.ReadXml(stream);
+
             stream.Close();
-        }
-        public void DeSerializeNow()
-        {
-            // Read object data from the file
-            Stream stream = File.Open("data.dat", FileMode.Open);
-            BinaryFormatter bf = new BinaryFormatter();
-            TableWrapper w = (TableWrapper)bf.Deserialize(stream);
-            stream.Close();
-
-            //Store in local dicts
-            this.ancestories = w.ancestories;
-            this.traitsDict = w.traitsDict;
-            this.equipment = w.equipment;
-            this.experiences = w.experiences;
-            this.sizes = w.sizes;
-            this.types = w.types;
-            w = null;
-        }
-    }
-
-    [Serializable()]
-    public class TableWrapper : ISerializable
-    {
-        public Dictionary<string, Trait> traitsDict;
-        public Dictionary<string, UnitAncestry> ancestories;
-        public Dictionary<string, UnitEquipment> equipment;
-        public Dictionary<string, UnitExperience> experiences;
-        public Dictionary<string, UnitSize> sizes;
-        public Dictionary<string, UnitType> types;
-
-        public TableWrapper() { }
-
-        public TableWrapper(
-            Dictionary<string, Trait> traitsDict,
-            Dictionary<string, UnitAncestry> ancestories,
-            Dictionary<string, UnitEquipment> equipment,
-            Dictionary<string, UnitExperience> experiences,
-            Dictionary<string, UnitSize> sizes,
-            Dictionary<string, UnitType> types)
-        {
-            this.traitsDict = traitsDict;
-            this.ancestories = ancestories;
-            this.equipment = equipment;
-            this.experiences = experiences;
-            this.sizes = sizes;
-            this.types = types;
-        }
-
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            // Assign key value pair for your data
-            info.AddValue("traitsDict", this.traitsDict);
-            info.AddValue("ancestories", this.ancestories);
-            info.AddValue("equipment", this.equipment);
-            info.AddValue("experiences", this.experiences);
-            info.AddValue("sizes", this.sizes);
-            info.AddValue("types", this.types);
-        }
-        public TableWrapper(SerializationInfo info, StreamingContext ctxt)
-        {
-            //Get the values from info and assign them to the properties
-            this.traitsDict = (Dictionary<string, Trait>)info.GetValue("traitsDict", typeof(Dictionary<string, Trait>));
-            this.ancestories = (Dictionary<string, UnitAncestry>)info.GetValue("ancestories", typeof(Dictionary<string, UnitAncestry>));
-            this.equipment = (Dictionary<string, UnitEquipment>)info.GetValue("equipment", typeof(Dictionary<string, UnitEquipment>));
-            this.experiences = (Dictionary<string, UnitExperience>)info.GetValue("experiences", typeof(Dictionary<string, UnitExperience>));
-            this.sizes = (Dictionary<string, UnitSize>)info.GetValue("sizes", typeof(Dictionary<string, UnitSize>));
-            this.types = (Dictionary<string, UnitType>)info.GetValue("types", typeof(Dictionary<string, UnitType>));
+            s.Close();
         }
     }
 }

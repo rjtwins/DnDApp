@@ -26,24 +26,41 @@ namespace DnDApp2
             //Grose c# why you do this to me
             string costmod = this.costMod.Text.Replace(',', '.');
 
-            dataManager.addType(this.name.Text,
-                Int32.Parse(this.attack.Text),
-                Int32.Parse(this.power.Text),
-                Int32.Parse(this.defense.Text),
-                Int32.Parse(this.toughness.Text),
-                Int32.Parse(this.morale.Text),
-                Double.Parse(costmod));
+            try
+            {
+                dataManager.addType(this.name.Text,
+            Int32.Parse(this.attack.Text),
+            Int32.Parse(this.power.Text),
+            Int32.Parse(this.defense.Text),
+            Int32.Parse(this.toughness.Text),
+            Int32.Parse(this.morale.Text),
+            Double.Parse(costmod));
+            }
+            catch (System.Data.ConstraintException)
+            {
+                string message = "Allready excists.";
+                string caption = "Would you like to override?";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(caption, message, buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {
+                    dataManager.addType(this.name.Text,
+                        Int32.Parse(this.attack.Text),
+                        Int32.Parse(this.power.Text),
+                        Int32.Parse(this.defense.Text),
+                        Int32.Parse(this.toughness.Text),
+                        Int32.Parse(this.morale.Text),
+                        Double.Parse(costmod), true);
+                }
+            }
+
             this.caller.updateBoxes();
         }
 
         private void Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
