@@ -115,7 +115,7 @@ namespace DnDApp2
             {
                 this.sizes.Rows.Remove(
                     this.sizes.AsEnumerable()
-                    .SingleOrDefault(r => r.Field<string>("name") == dice));
+                    .SingleOrDefault(r => r.Field<string>("size") == dice));
             }
 
             this.sizes.Rows.Add(new object[] { dice, mod });
@@ -123,6 +123,7 @@ namespace DnDApp2
 
         internal void generateCard()
         {
+            //TODO
             return;
         }
 

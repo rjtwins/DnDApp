@@ -96,8 +96,8 @@ namespace DnDApp2
             dataManager.unit.unitTypeName);
             this.attacko.Text = dataManager.unit.attack.ToString();
             this.powero.Text = dataManager.unit.power.ToString();
-            this.defenseo.Text = dataManager.unit.defense.ToString();
-            this.toughnesso.Text = dataManager.unit.toughness.ToString();
+            this.defenseo.Text = (Int32.Parse(dataManager.unit.defense.ToString()) + 10).ToString();
+            this.toughnesso.Text = (Int32.Parse(dataManager.unit.toughness.ToString()) + 10).ToString();
             this.moraleo.Text = dataManager.unit.morale.ToString();
             this.sizeo.Text = dataManager.unit.size.ToString();
             this.costo.Text = dataManager.unit.cost.ToString();
