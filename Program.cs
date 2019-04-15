@@ -148,23 +148,27 @@ namespace DnDApp2
             types = new DataSet1.typeDataTable();
             sizes = new DataSet1.sizeDataTable();
 
-            filePath = "traits_saf.xml";
-            traitsDict.ReadXml(filePath);
+            StringReader stream;
 
-            filePath = "ancestories_saf.xml";
-            ancestories.ReadXml(filePath);
+            stream = new StringReader(Properties.Resources.traits_saf);
+            traitsDict.ReadXml(stream);
 
-            filePath = "equipment_saf.xml";
-            equipment.ReadXml(filePath);
+            stream = new StringReader(Properties.Resources.ancestories_saf);
+            ancestories.ReadXml(stream);
 
-            filePath = "experiences_saf.xml";
-            experiences.ReadXml(filePath);
+            stream = new StringReader(Properties.Resources.equipment_saf);
+            equipment.ReadXml(stream);
 
-            filePath = "types_saf.xml";
-            types.ReadXml(filePath);
+            stream = new StringReader(Properties.Resources.experiences_saf);
+            experiences.ReadXml(stream);
 
-            filePath = "sizes_saf.xml";
-            sizes.ReadXml(filePath);
+            stream = new StringReader(Properties.Resources.types_saf);
+            types.ReadXml(stream);
+
+            stream = new StringReader(Properties.Resources.sizes_saf);
+            sizes.ReadXml(stream);
+
+            stream.Close();
         }
 
         public void SerializeNow(String path)

@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <equipment>
+    <name>Light</name>
+    <attack>0</attack>
+    <power>1</power>
+    <defense>1</defense>
+    <toughness>0</toughness>
+    <morale>0</morale>
+  </equipment>
+  <equipment>
+    <name>Medium</name>
+    <attack>0</attack>
+    <power>2</power>
+    <defense>2</defense>
+    <toughness>0</toughness>
+    <morale>0</morale>
+  </equipment>
+  <equipment>
+    <name>Heavy</name>
+    <attack>0</attack>
+    <power>4</power>
+    <defense>4</defense>
+    <toughness>0</toughness>
+    <morale>0</morale>
+  </equipment>
+  <equipment>
+    <name>Super-Heavy</name>
+    <attack>0</attack>
+    <power>6</power>
+    <defense>6</defense>
+    <toughness>0</toughness>
+    <morale>0</morale>
+  </equipment>
+</DocumentElement>

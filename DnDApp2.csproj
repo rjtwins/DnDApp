@@ -143,6 +143,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
@@ -169,6 +170,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="SaF\types_saf.xml" />
+    <None Include="SaF\traits_saf.xml" />
+    <None Include="SaF\sizes_saf.xml" />
+    <None Include="SaF\experiences_saf.xml" />
+    <None Include="SaF\equipment_saf.xml" />
+    <None Include="SaF\ancestories_saf.xml" />
     <Content Include="DnDUnitCalc.csproj" />
   </ItemGroup>
   <ItemGroup>

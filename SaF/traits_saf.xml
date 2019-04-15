@@ -1,0 +1,89 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <trait>
+    <name>Amphibious</name>
+    <desc>This unit does not suffer terrain penalties for fighting in water or on land. </desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Bred for war</name>
+    <desc>This unit cannot be diminished, and cannot have disadvantage on morale checks. </desc>
+    <cost>100</cost>
+  </trait>
+  <trait>
+    <name>Brutal</name>
+    <desc>This unit inflicts two casualties on a successful power test.
+</desc>
+    <cost>200</cost>
+  </trait>supplements
+  <trait>
+    <name>Courageous</name>
+    <desc>Once per battle, this unit can choose to succeed at a morale check it just failed.</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Eternal</name>
+    <desc>This unit cannot be horrified, and it always succeeds on morale checks to attack undead and fiends,</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Feast</name>
+    <desc>If this unit diminishes an enemy unit, it immediately gains a free attack against that unit.</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Frenzy</name>
+    <desc>If this unit diminishes an enemy unit, it immediately gains a free attack against that unit.</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Horrify</name>
+    <desc>Inflicts two casualties on a successful power check if this unit’s size is greater than their target’s.</desc>
+    <cost>200</cost>
+  </trait>
+  <trait>
+    <name>Martial</name>
+    <desc>Inflicts two casualties on a successful power check if this unit’s size is greater than their target’s.</desc>
+    <cost>100</cost>
+  </trait>
+  <trait>
+    <name>Mindless</name>
+    <desc>This unit cannot fail morale checks.</desc>
+    <cost>100</cost>
+  </trait>
+  <trait>
+    <name>Regenerate</name>
+    <desc>When this unit refreshes, increment its casualty die. This ability ceases to function if the unit suffers a casualty from battle magic.</desc>
+    <cost>200</cost>
+  </trait>
+  <trait>
+    <name>Ravenous</name>
+    <desc>While there is a diminished enemy unit, this unit can spend a round feeding on the corpses. increment their casualty die.</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Rock-Hurler</name>
+    <desc>If this unit succeeds on an attack check, it inflicts 2 casualties, against fortifications deal 1d6.</desc>
+    <cost>250</cost>
+  </trait>
+  <trait>
+    <name>Savage</name>
+    <desc>This unit has advantage on the first attack check it makes each battle.</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Stalwart</name>
+    <desc>Enemy battle magic has disadvantage on power tests against this unit.</desc>
+    <cost>50</cost>
+  </trait>
+  <trait>
+    <name>Twisting Roots</name>
+    <desc>As an action, this unit can sap the walls of a fortification. Siege units have advantage on power checks against sapped fortifications.</desc>
+    <cost>200</cost>
+  </trait>
+  <trait>
+    <name>Undead</name>
+    <desc>Green and regular troops must pass a morale check to attack this unit. Each enemy unit need only do this once.</desc>
+    <cost>50</cost>
+  </trait>
+</DocumentElement>

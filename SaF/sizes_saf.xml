@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<DocumentElement>
+  <size>
+    <size>1d4</size>
+    <costmod>66</costmod>
+  </size>
+  <size>
+    <size>1d6</size>
+    <costmod>100</costmod>
+  </size>
+  <size>
+    <size>1d8</size>
+    <costmod>133</costmod>
+  </size>
+  <size>
+    <size>1d10</size>
+    <costmod>166</costmod>
+  </size>
+  <size>
+    <size>1d12</size>
+    <costmod>200</costmod>
+  </size>
+</DocumentElement>
