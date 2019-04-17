@@ -80,6 +80,18 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="unit" msprop:Generator_TableClassName="unitDataTable" msprop:Generator_TableVarName="tableunit" msprop:Generator_RowChangedName="unitRowChanged" msprop:Generator_TablePropName="unit" msprop:Generator_RowDeletingName="unitRowDeleting" msprop:Generator_RowChangingName="unitRowChanging" msprop:Generator_RowEvHandlerName="unitRowChangeEventHandler" msprop:Generator_RowDeletedName="unitRowDeleted" msprop:Generator_RowClassName="unitRow" msprop:Generator_UserTableName="unit" msprop:Generator_RowEvArgName="unitRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" type="xs:string" />
+              <xs:element name="ancestry" msprop:Generator_ColumnVarNameInTable="columnancestry" msprop:Generator_ColumnPropNameInRow="ancestry" msprop:Generator_ColumnPropNameInTable="ancestryColumn" msprop:Generator_UserColumnName="ancestry" type="xs:string" minOccurs="0" />
+              <xs:element name="equipment" msprop:Generator_ColumnVarNameInTable="columnequipment" msprop:Generator_ColumnPropNameInRow="equipment" msprop:Generator_ColumnPropNameInTable="equipmentColumn" msprop:Generator_UserColumnName="equipment" type="xs:string" minOccurs="0" />
+              <xs:element name="experience" msprop:Generator_ColumnVarNameInTable="columnexperience" msprop:Generator_ColumnPropNameInRow="experience" msprop:Generator_ColumnPropNameInTable="experienceColumn" msprop:Generator_UserColumnName="experience" type="xs:string" minOccurs="0" />
+              <xs:element name="type" msprop:Generator_ColumnVarNameInTable="columntype" msprop:Generator_ColumnPropNameInRow="type" msprop:Generator_ColumnPropNameInTable="typeColumn" msprop:Generator_UserColumnName="type" type="xs:string" minOccurs="0" />
+              <xs:element name="size" msprop:Generator_ColumnVarNameInTable="columnsize" msprop:Generator_ColumnPropNameInRow="size" msprop:Generator_ColumnPropNameInTable="sizeColumn" msprop:Generator_UserColumnName="size" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
@@ -104,6 +116,10 @@
     </xs:unique>
     <xs:unique name="trait_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:trait" />
+      <xs:field xpath="mstns:name" />
+    </xs:unique>
+    <xs:unique name="unit_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:unit" />
       <xs:field xpath="mstns:name" />
     </xs:unique>
   </xs:element>

@@ -30,19 +30,22 @@ namespace DnDApp2
         public DataSet1.experienceDataTable experiences = new DataSet1.experienceDataTable();
         public DataSet1.typeDataTable types = new DataSet1.typeDataTable();
         public DataSet1.sizeDataTable sizes = new DataSet1.sizeDataTable();
+        public DataSet1.unitDataTable units = new DataSet1.unitDataTable();
 
-        public void makeUnit(string ancestory, string unitEquipment, string experience, string unitSize, string unitType)
+        public void makeUnit(string name = "", string ancestory = "", string unitEquipment = "", string experience = "", string unitSize = "", string unitType = "")
         {
 
             if (ancestory == null || ancestory == "" ||
                 unitType == null || unitType == "" ||
                 unitEquipment == null || unitEquipment == "" ||
                 experience == null || experience == "" ||
-                unitSize == null || unitSize == "")
+                unitSize == null || unitSize == "" ||
+                string.IsNullOrEmpty(unitSize))
             {
                 return;
             }
             this.unit = new Unit(
+                name, 
                 this.ancestories.AsEnumerable()
                     .SingleOrDefault(r => r.Field<string>("name") == ancestory),
                 this.types.AsEnumerable()
@@ -58,6 +61,56 @@ namespace DnDApp2
             unit.calc_cost();
         }
 
+        public void saveUnit(bool force = false)
+        {
+            if (force)
+            {
+                this.ancestories.Rows.Remove(
+                    this.units.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == this.unit.name));
+            }
+            this.units.Rows.Add(new object[] { unit.name, unit.ancestryName, unit.equipmentName, unit.experienceName, unit.unitTypeName, unit.size});
+        }
+        public void loadUnit(string name)
+        {
+            DataRow unitRow = this.units.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == name);
+
+            //foreach(object cell in unitRow.ItemArray)
+            //    Console.WriteLine(cell.ToString());
+
+            Console.WriteLine("---LOAD UNIT---");
+            Console.WriteLine((string)unitRow["name"]);
+            Console.WriteLine((string)unitRow["ancestry"]);
+            Console.WriteLine((string)unitRow["equipment"]);
+            Console.WriteLine((string)unitRow["experience"]);
+            Console.WriteLine((string)unitRow["size"]);
+            Console.WriteLine((string)unitRow["type"]);
+            Console.WriteLine("---LOAD UNIT---");
+
+            this.makeUnit(
+                (string)unitRow["name"],
+                (string)unitRow["ancestry"], 
+                (string)unitRow["equipment"], 
+                (string)unitRow["experience"], 
+                (string)unitRow["size"],
+                (string)unitRow["type"]
+                );
+        }
+
+        public void removeUnit()
+        {
+            try
+            {
+                this.units.Rows.Remove(
+                    this.units.AsEnumerable()
+                    .SingleOrDefault(r => r.Field<string>("name") == this.unit.name));
+            }
+            catch (IndexOutOfRangeException)
+            {
+                return;
+            }
+        }
         public void addTrait(string name, string desc, int cost, bool force = false)
         {
             if (force)
@@ -120,13 +173,11 @@ namespace DnDApp2
 
             this.sizes.Rows.Add(new object[] { dice, mod });
         }
-
-        internal void generateCard()
+        internal void generateCard(System.Drawing.Bitmap bmp, string path)
         {
-            //TODO
+            bmp.Save(path);
             return;
         }
-
         public void addType(string name, int attack, int power, int defense, int toughness, int morale, double mod, bool force = false)
         {
             if (force)
@@ -137,10 +188,8 @@ namespace DnDApp2
             }
             this.types.Rows.Add(new object[] { name, attack, power, defense, toughness, morale, mod });
         }
-
         public void loadDefaultData()
         {
-            string filePath;
             traitsDict = new DataSet1.traitDataTable();
             ancestories = new DataSet1.ancestryDataTable();
             equipment = new DataSet1.equipmentDataTable();
@@ -170,8 +219,7 @@ namespace DnDApp2
 
             stream.Close();
         }
-
-        public void SerializeNow(String path)
+        public void exportTables(String path)
         {
             BinaryFormatter b = new BinaryFormatter();
             Stream s = File.OpenWrite(path);
@@ -202,12 +250,13 @@ namespace DnDApp2
 
             this.sizes.WriteXml(sw);
             xmlStringDict.Add("sizes", sw.ToString());
+            sw = new StringWriter();
 
             b.Serialize(s, xmlStringDict);
             sw.Close();
             s.Close();
         }
-        public void DeSerializeNow(String path)
+        public void importTables(String path)
         {
             traitsDict = new DataSet1.traitDataTable();
             ancestories = new DataSet1.ancestryDataTable();
@@ -215,6 +264,7 @@ namespace DnDApp2
             experiences = new DataSet1.experienceDataTable();
             types = new DataSet1.typeDataTable();
             sizes = new DataSet1.sizeDataTable();
+            units = new DataSet1.unitDataTable();
 
             Dictionary<string, string> xmlStringDict;
 
@@ -240,6 +290,39 @@ namespace DnDApp2
 
             stream = new StringReader(xmlStringDict["sizes"]);
             sizes.ReadXml(stream);
+
+            stream.Close();
+            s.Close();
+        }
+        public void exportLibrary(string path)
+        {
+            BinaryFormatter b = new BinaryFormatter();
+            Stream s = File.OpenWrite(path);
+
+            Dictionary<string, string> xmlStringDict = new Dictionary<string, string>();
+
+            StringWriter sw = new StringWriter();
+
+            this.units.WriteXml(sw);
+            xmlStringDict.Add("units", sw.ToString());
+
+            b.Serialize(s, xmlStringDict);
+            sw.Close();
+            s.Close();
+        }
+        public void importLibrary(string path)
+        {
+            units = new DataSet1.unitDataTable();
+
+            Dictionary<string, string> xmlStringDict;
+
+            FileStream s = new FileStream(path, FileMode.Open);
+            BinaryFormatter b = new BinaryFormatter();
+            xmlStringDict = (Dictionary<string, string>)b.Deserialize(s);
+            StringReader stream;
+
+            stream = new StringReader(xmlStringDict["units"]);
+            units.ReadXml(stream);
 
             stream.Close();
             s.Close();

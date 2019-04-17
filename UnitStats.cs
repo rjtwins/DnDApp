@@ -14,6 +14,7 @@ namespace DnDApp2
         private DataRow equipment;
         private DataRow experience;
         private DataRow unitSize;
+        public string name { get; set; }
         public string ancestryName { get; private set; }
         public string unitTypeName { get; private set; }
         public string equipmentName { get; private set; }
@@ -29,9 +30,9 @@ namespace DnDApp2
         public double cost { get; private set; } = 0;
         private double cost_mod;
 
-        public Unit(DataRow ancestry, DataRow unitType, DataRow equipment, DataRow experience, DataRow unitSize)
+        public Unit(string name, DataRow ancestry, DataRow unitType, DataRow equipment, DataRow experience, DataRow unitSize)
         {
-
+            this.name = name;
             this.ancestry = ancestry;
             this.unitType = unitType;
             this.equipment = equipment;
@@ -46,6 +47,8 @@ namespace DnDApp2
             this.equipmentName = (string)equipment["name"];
             this.experienceName = (string)experience["name"];
         }
+
+
 
         public void totals()
         {
@@ -82,10 +85,11 @@ namespace DnDApp2
             this.trait_cost = Int32.Parse((string)this.ancestry["traitsCost"]);
             this.cost_mod = (Double.Parse((string)this.unitSize["costmod"])/100) * (Double.Parse((string)this.unitType["costmod"])/100);
         }
+
         public void calc_cost()
         {
-            double total = (this.attack + this.defense + this.power + this.toughness) + 2 * this.morale;
-            total = total * this.cost_mod * 10;
+            double total = (this.attack + this.defense + this.power + this.toughness) + this.morale*2;
+            total = Math.Max(total, 0) * this.cost_mod * 10;
             total += this.trait_cost + 30;
             this.cost = total;
         }
