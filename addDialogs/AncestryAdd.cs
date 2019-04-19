@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DnDApp2
@@ -18,9 +12,9 @@ namespace DnDApp2
         {
             InitializeComponent();
             this.dataManager = dataManager;
-            foreach (DataRow entry in dataManager.traitsDict)
+            foreach (string entry in dataManager.getTraitNames())
             {
-                this.traitscbox.Items.Add((string)entry["name"]);
+                this.traitscbox.Items.Add(entry);
             }
             this.caller = caller;
         }

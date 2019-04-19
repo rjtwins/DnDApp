@@ -26,29 +26,29 @@ namespace DnDApp2
             this.typeBox.Items.Clear();
             this.sizeBox.Items.Clear();
             this.unitLibraryBox.Items.Clear();
-            foreach (DataRow entry in dataManager.ancestories)
+            foreach (string entry in dataManager.getAncestryNames())
             {
-                this.ancestryBox.Items.Add((string)entry["name"]);
+                this.ancestryBox.Items.Add(entry);
             }
-            foreach (DataRow entry in dataManager.equipment)
+            foreach (string entry in dataManager.getEquipmentNames())
             {
-                this.equipmentBox.Items.Add((string)entry["name"]);
+                this.equipmentBox.Items.Add(entry);
             }
-            foreach (DataRow entry in dataManager.experiences)
+            foreach (string entry in dataManager.getExperienceNames())
             {
-                this.experienceBox.Items.Add((string)entry["name"]);
+                this.experienceBox.Items.Add(entry);
             }
-            foreach (DataRow entry in dataManager.types)
+            foreach (string entry in dataManager.getTypeNames())
             {
-                this.typeBox.Items.Add((string)entry["name"]);
+                this.typeBox.Items.Add(entry);
             }
-            foreach (DataRow entry in dataManager.sizes)
+            foreach (string entry in dataManager.getSizeNames())
             {
-                this.sizeBox.Items.Add((string)entry["size"]);
+                this.sizeBox.Items.Add(entry);
             }
-            foreach (DataRow entry in dataManager.units)
+            foreach (string entry in dataManager.getUnitNames())
             {
-                this.unitLibraryBox.Items.Add((string)entry["name"]);
+                this.unitLibraryBox.Items.Add(entry);
             }
         }
 
@@ -92,33 +92,27 @@ namespace DnDApp2
         {
 
             dataManager.makeUnit(this.nameInputBox.Text, this.ancestryBox.Text, this.equipmentBox.Text, this.experienceBox.Text, this.sizeBox.Text, this.typeBox.Text);
-            if (dataManager.unit == null)
+            if (dataManager.checkUnit() == false)
                 return;
 
-            this.nameInputBox.Text = dataManager.unit.name;
+            this.nameInputBox.Text = dataManager.unitName();
             this.cardName.Text = String.Format("{0} {1} {2} {3}", 
-            dataManager.unit.experienceName,
-            dataManager.unit.equipmentName,
-            dataManager.unit.ancestryName,
-            dataManager.unit.unitTypeName);
-            this.attacko.Text = dataManager.unit.attack.ToString();
-            this.powero.Text = dataManager.unit.power.ToString();
-            this.defenseo.Text = (Int32.Parse(dataManager.unit.defense.ToString()) + 10).ToString();
-            this.toughnesso.Text = (Int32.Parse(dataManager.unit.toughness.ToString()) + 10).ToString();
-            this.moraleo.Text = dataManager.unit.morale.ToString();
-            this.sizeo.Text = dataManager.unit.size.ToString();
-            this.costo.Text = dataManager.unit.cost.ToString();
+            dataManager.unitAncestry(),
+            dataManager.unitEquipment(),
+            dataManager.unitExperience(),
+            dataManager.unitType());
+            this.attacko.Text = dataManager.unitAttack();
+            this.powero.Text = dataManager.unitPower();
+            this.defenseo.Text = dataManager.unitDefense();
+            this.toughnesso.Text = dataManager.unitToughness();
+            this.moraleo.Text = dataManager.unitMorale();
+            this.sizeo.Text = dataManager.unitSize();
+            this.costo.Text = dataManager.unitCost();
             this.traitsOutputText.Text = "";
             string traitsText = "";
-            foreach (string trait in dataManager.unit.traits)
+            foreach (string trait in dataManager.unitTraits())
             {
-                DataRow traitRow = this.dataManager.traitsDict.AsEnumerable()
-                    .SingleOrDefault(r => r.Field<string>("name") == trait);
-
-                if (traitRow == null)
-                    return;
-
-                traitsText +=  trait + "\n" + (string)traitRow["desc"] + "\n\n";
+                traitsText +=  trait + "\n" + dataManager.traitDesc(trait) + "\n\n";
             }
             this.traitsOutputText.Text = traitsText;
         }
@@ -181,7 +175,7 @@ namespace DnDApp2
             if (saveFileDialog1.FileName != "")
             {
                 string filePath = saveFileDialog1.FileName;
-                dataManager.generateCard(bmp, filePath);
+                dataManager.saveImage(bmp, filePath);
             }
         }
 
@@ -230,11 +224,11 @@ namespace DnDApp2
         private void UnitLibraryBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.dataManager.loadUnit((string)this.unitLibraryBox.Text);
-            this.ancestryBox.SelectedIndex = this.ancestryBox.FindStringExact(dataManager.unit.ancestryName);
-            this.equipmentBox.SelectedIndex = this.equipmentBox.FindStringExact(dataManager.unit.equipmentName);
-            this.experienceBox.SelectedIndex = this.experienceBox.FindStringExact(dataManager.unit.experienceName);
-            this.typeBox.SelectedIndex = this.typeBox.FindStringExact(dataManager.unit.unitTypeName);
-            this.sizeBox.SelectedIndex = this.sizeBox.FindStringExact(dataManager.unit.size);
+            this.ancestryBox.SelectedIndex = this.ancestryBox.FindStringExact(dataManager.unitAncestry());
+            this.equipmentBox.SelectedIndex = this.equipmentBox.FindStringExact(dataManager.unitEquipment());
+            this.experienceBox.SelectedIndex = this.experienceBox.FindStringExact(dataManager.unitExperience());
+            this.typeBox.SelectedIndex = this.typeBox.FindStringExact(dataManager.unitType());
+            this.sizeBox.SelectedIndex = this.sizeBox.FindStringExact(dataManager.unitSize());
             //I realzize we are making a unit we just made in the update output but I'm to lazy to change this.
             updateOutput(sender, e);
         }
@@ -243,7 +237,7 @@ namespace DnDApp2
         {
             try
             {
-                this.dataManager.unit.name = (string)this.nameInputBox.Text;
+                this.dataManager.setUnitName((string)this.nameInputBox.Text);
                 this.dataManager.saveUnit();
                 this.updateBoxes();
             }

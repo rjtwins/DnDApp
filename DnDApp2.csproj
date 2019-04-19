@@ -113,7 +113,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitStats.cs" />
+    <Compile Include="Unit.cs" />
     <EmbeddedResource Include="addDialogs\SizeAdd.resx">
       <DependentUpon>SizeAdd.cs</DependentUpon>
     </EmbeddedResource>

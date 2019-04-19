@@ -45,4 +45,13 @@
     <morale>0</morale>
     <costmod>100</costmod>
   </type>
+  <type>
+    <name>Siege Engine</name>
+    <attack>1</attack>
+    <power>1</power>
+    <defense>0</defense>
+    <toughness>1</toughness>
+    <morale>0</morale>
+    <costmod>150</costmod>
+  </type>
 </DocumentElement>
