@@ -272,6 +272,7 @@
             this.Controls.Add(this.atkl);
             this.Controls.Add(this.label2);
             this.Name = "AncestryAdd";
+            this.ShowIcon = false;
             this.Text = "AncestryAdd";
             ((System.ComponentModel.ISupportInitialize)(this.toughness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.defense)).EndInit();

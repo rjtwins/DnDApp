@@ -245,7 +245,7 @@
             this.Controls.Add(this.label2);
             this.Name = "TypeAdd";
             this.ShowIcon = false;
-            this.Text = "Add Unit Type";
+            this.Text = "S";
             ((System.ComponentModel.ISupportInitialize)(this.toughness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.defense)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.power)).EndInit();

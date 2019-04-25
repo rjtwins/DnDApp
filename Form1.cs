@@ -112,6 +112,8 @@ namespace DnDApp2
             string traitsText = "";
             foreach (string trait in dataManager.unitTraits())
             {
+                if (trait == null || trait == "")
+                    break;
                 traitsText +=  trait + "\n" + dataManager.traitDesc(trait) + "\n\n";
             }
             this.traitsOutputText.Text = traitsText;
